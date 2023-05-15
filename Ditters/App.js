@@ -2,12 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StyleSheet, Text, View } from 'react-native';
 import AppBar from './ui/AppBar';
+import Drawer from './ui/Drawer';
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
         <AppBar/>
+        <Drawer />
         <Text>Hello my Wankers Team !</Text>
         <StatusBar style="auto" />
       </View>
