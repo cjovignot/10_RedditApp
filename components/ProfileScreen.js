@@ -3,6 +3,7 @@ import {View, Text, Image, ScrollView, TextInput} from 'react-native';
 import axios from 'axios';
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
 import { Avatar } from 'react-native-paper';
+import RedditLogin from "./RedditAuth"
 
 
 function ProfileScreen() {
@@ -56,6 +57,9 @@ function ProfileScreen() {
       <Text>{data.subreddit.public_description}</Text>
       <Text>{data.link_karma} karma</Text>
       <Text>{formattedDate}</Text>
+
+
+    <RedditLogin/>
       
       
     </View>
