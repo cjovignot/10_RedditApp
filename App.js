@@ -7,6 +7,7 @@ import { ActivityIndicator, MD2Colors } from "react-native-paper";
 import ProfileScreen from "./components/ProfileScreen";
 import SecondScreen from "./components/SecondScreen";
 import HomePage from "./components/HomePage";
+import Drawer from "./components/Drawer";
 import { Button, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
@@ -21,6 +22,7 @@ function HomeScreen() {
         <Button mode="contained" onPress={() => navigation.navigate("Second")}>
           Go to Second Screen
         </Button> */}
+        {/* <Drawer /> */}
         <HomePage />
       </View>
     </ScrollView>
