@@ -1,15 +1,19 @@
 import * as React from "react";
 import { Drawer } from "react-native-paper";
-import { Button } from "react-native-paper";
+
+import axios from "axios";
 
 const MySubRedditList = () => {
-  const [subrUser, setSubrUser] = useState(null);
-  const [visible, setVisible] = React.useState(false);
+  const [active, setActive] = React.useState("");
+  const [subrUser, setSubrUser] = React.useState(null);
+  const api = axios.create({
+    baseURL: "https://oauth.reddit.com",
+    headers: {
+      Authorization: `Bearer ${"eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0"}`, // replace with your access token
+    },
+  });
 
-  const toggleDrawer = () => setVisible(!visible);
-
-  useEffect(() => {
-    // Fetch data when component mounts
+  React.useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await api.get("/subreddits/mine/subscriber");
@@ -23,23 +27,19 @@ const MySubRedditList = () => {
     fetchData();
   }, []);
 
-  const [active, setActive] = React.useState("");
-
   return (
-    <>
-      <Button onPress={toggleDrawer}>Toggle Drawer</Button>
-      <Drawer.Section title="My Subreddit" visible={visible}>
-        {subrUser &&
-          subrUser.map((subreddit, index) => (
-            <Drawer.Item
-              key={index}
-              label={subreddit.data.url}
-              active={active === subreddit.data.url}
-              onPress={() => setActive(subreddit.data.url)}
-            />
-          ))}
-      </Drawer.Section>
-    </>
+    <Drawer.Section title="Some title">
+      <Drawer.Item
+        label="First Item"
+        active={active === "first"}
+        onPress={() => setActive("first")}
+      />
+      <Drawer.Item
+        label="Second Item"
+        active={active === "second"}
+        onPress={() => setActive("second")}
+      />
+    </Drawer.Section>
   );
 };
 
