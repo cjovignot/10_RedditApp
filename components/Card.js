@@ -1,9 +1,8 @@
 import * as React from 'react';
+import { StyleSheet, View, Image, useWindowDimensions } from 'react-native';
 import { Avatar, Button, Card, Text, IconButton } from 'react-native-paper';
-import { StyleSheet, View, Image } from 'react-native';
-import {decode} from 'html-entities';
 import RenderHtml from 'react-native-render-html';
-import { useWindowDimensions } from 'react-native';
+import {decode} from 'html-entities';
 
 import Icon from '@mdi/react';
 import { mdiChevronDoubleDown } from '@mdi/js';
@@ -14,7 +13,7 @@ const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 const MyComponent = ({ subredditsData }) => {
   const { width } = useWindowDimensions();
 
-  console.log(decode(subredditsData.data.media_metadata?.p?.u))
+  // console.log(decode(subredditsData.data.media_metadata?.p?.u))
 
   const source = {
     html: decode(subredditsData.data.selftext_html)

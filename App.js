@@ -1,68 +1,68 @@
+import "react-native-gesture-handler";
+
 import * as React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { Button, View, ScrollView } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Provider as PaperProvider } from "react-native-paper";
-import { ActivityIndicator, MD2Colors } from "react-native-paper";
+import { Provider as PaperProvider, IconButton } from "react-native-paper";
 import ProfileScreen from "./components/ProfileScreen";
-import SecondScreen from "./components/SecondScreen";
+import MySubredditList from "./components/MySubredditList";
+import PostList from "./components/Postlist";
 import HomePage from "./components/HomePage";
-import Drawer from "./components/Drawer";
-import { Button, IconButton } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
 
-function HomeScreen() {
-  const navigation = useNavigation();
-
+function RealDittersStack() {
   return (
-    <ScrollView>
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        {/* <Text>C'est la faute de Cosme</Text>
-        <ActivityIndicator animating={true} color={MD2Colors.red800} />
-        <Button mode="contained" onPress={() => navigation.navigate("Second")}>
-          Go to Second Screen
-        </Button> */}
-        {/* <Drawer /> */}
-        <HomePage />
-      </View>
-    </ScrollView>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Ditters"
+        component={HomeScreen}
+        options={{ headerShown: false, drawerBarLabel: "prout" }}
+      />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen
+        name="Postlist"
+        component={PostList}
+        options={{ title: "My home" }}
+      />
+    </Stack.Navigator>
   );
 }
-
-HomeScreen.navigationOptions = ({ navigation }) => ({
-  headerRight: () => (
-    <IconButton
-      icon="account-circle"
-      size={28}
-      onPress={() => navigation.navigate("Profile")}
-    />
-  ),
-});
+const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
-function App() {
+export default function App() {
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Ditters"
-            component={HomeScreen}
-            options={({ navigation }) => ({
-              headerRight: () => (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        {/* Pass the separate component to Drawer.Screen */}
+        <Drawer.Screen
+          name="RealDitters"
+          component={RealDittersStack}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <>
                 <IconButton
                   icon="account-circle"
                   size={28}
                   onPress={() => navigation.navigate("Profile")}
                 />
-              ),
-            })}
-          />
-          <Stack.Screen name="Second" component={SecondScreen} />
-          <Stack.Screen name="Profile" component={ProfileScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+              </>
+            ),
+          })}
+        />
+        <Drawer.Screen name="My Subreddits" component={MySubredditList} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
-export default App;
+
+function HomeScreen() {
+  return (
+    <ScrollView>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <HomePage />
+      </View>
+    </ScrollView>
+  );
+}
