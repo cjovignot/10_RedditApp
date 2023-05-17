@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, FlatList  } from "react-native";
+import { View, Text, Image, FlatList, StyleSheet } from "react-native";
 import Card from './Card';
 import Filters from './Filters';
 import axios from 'axios';

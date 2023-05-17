@@ -2,6 +2,8 @@ import * as React from "react";
 import { Text, View, ScrollView, StyleSheet } from "react-native";
 import { Provider as PaperProvider, IconButton } from "react-native-paper";
 
+import Card from '../components/Card';
+
 import { Button } from "react-native-paper";
 import axios from "axios";
 
@@ -17,7 +19,7 @@ const Postlist = ({ route, navigation }) => {
   const api = axios.create({
     baseURL: "https://oauth.reddit.com",
     headers: {
-      Authorization: `Bearer ${"eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0MzI2MDQ4LCJpYXQiOjE2ODQyMzk2NDgsImp0aSI6IjMwMjgyNzQ4MzIzOC14OXRkM3A3czIzcjBhVk8yWnVKWG1wV0kxTFBBNmciLCJjaWQiOiJMbUtZMkJiRkpzcGgzZmdvaGV1ME13IiwibGlkIjoidDJfM3Y0N254aWUiLCJhaWQiOiJ0Ml8zdjQ3bnhpZSIsImxjYSI6MTU1OTI3NzA0MjExNywic2NwIjoiZUp5S1Z0SlNpZ1VFQUFEX193TnpBU2MifQ.zzFlv3-CBBa2C0Lhw7rrh7gJSOvlVESRw5_jMDvoPIKu4T3ZLKLXfThIK9q6y2E7nQAY1ZLySZ1SOUA8EphrAhkGL2KR1nhsh30i9vFljCKJR-VMh9P42L8UAuT1LAbpozY_AqvxUUIqHcWmVSmsPjdxNhZc3yhkjbiXyCebr1WfUCRP278o77eDiCTgtO9awSeqZk_eJwZ3qo6_Fl8XG7_EqkvmeMgdTdeywnx2ExsFgb0Gn4mZxOqhYnSHfSPQ7spgYZ-idfkrg2NZe01YmAT6Gw60R8N6CaC1uxRLqRJdkNfNRHkhZMKfDY1NDwoeg6D7UBcz5vqRBokOxuMwAQ"}`,
+      Authorization: `Bearer ${"eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0Mzk3MjE4LCJpYXQiOjE2ODQzMTA4MTgsImp0aSI6IjMxOTc5NTQ5MTc4OTI5LW9yQ2pUZUtOejk5VkpJT0w1NHY0OXhnRlJZeHBvZyIsImNpZCI6ImlBanJEc0x5Rl9FU3RHSWFONDVOZ1EiLCJsaWQiOiJ0Ml9iYzM3OXc2NXQiLCJhaWQiOiJ0Ml9iYzM3OXc2NXQiLCJsY2EiOjE2ODQxNDg3ODc0MjAsInNjcCI6ImVKeUtWdEpTaWdVRUFBRF9fd056QVNjIiwiZmxvIjo5fQ.BnShEX1aOETDcKDskw01iDJkbvtHUYyFhnRwAfPuk7lFA1eTgVVBYVMUIJvzi6xk4Ma_V0BcUH-dtzpBhH1q9vl90QJS2mpzUjzESsMIc7-zmTTJe322JkHQWEo08FqRaHOxbd6pXnYq43dZsHjcEfvTsnKoHgxqvUSmdidmY4m6dcCR7PK--mBVBhWohIGnaOXWsFKWCKFs_pfU4OIpEmX8AW6od6q6Y0wWxEasrykIqt2hvxKhk2tVni77QMxSpQmet3lVcvFzl__CzXf1liXWJH-hAu14RGIZ6xAsSTmQtCETF0o5F32JrtE32f3WSmOgsOsbohfZTdFCWzSgJQ"}`,
     },
   });
 
@@ -56,11 +58,10 @@ const Postlist = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView onScroll={ScrollOffset} ref={scrollViewRef}>
-        <Text>Posts from {subreddit}</Text>
-        {posts &&
-          posts.map((post, index) => (
-            <Text key={index}>{post.data?.title}</Text>
-          ))}
+        {posts && posts.map((post, index) => (
+          <Card key={index} subredditsData={post}/>
+        ))}
+
         <View style={styles.loader}>
           <Button
             icon="plus"
@@ -68,26 +69,17 @@ const Postlist = ({ route, navigation }) => {
             buttonColor="black"
             dark={true}
             onPress={loadMorePosts}
-            style={{ maxWidth: 200 }}
-          >
-            Load More
+            style={{ maxWidth: 200, margin: 20 }} >Load More
           </Button>
         </View>
-        <View style={styles.buttonContainer}>
-          {showScroll && (
-            <IconButton
-              icon="arrow-up-bold-box"
-              size={28}
-              onPress={Topscroll}
-            />
-          )}
-        </View>
       </ScrollView>
+
       <View style={styles.buttonContainer}>
         {showScroll && (
-          <IconButton icon="arrow-up-bold-box" size={28} onPress={Topscroll} />
+          <IconButton icon="arrow-up-bold-box" size={40} onPress={Topscroll} />
         )}
       </View>
+      
     </View>
   );
 };
