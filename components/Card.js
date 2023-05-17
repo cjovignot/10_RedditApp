@@ -49,7 +49,7 @@ const MyComponent = ({ subredditsData }) => {
             <Card.Cover style={[{height: 350}, {width: 'auto'}, {marginTop: 20}]} source={{ uri: decode(subredditsData?.data?.media_metadata[Object.keys(subredditsData?.data?.media_metadata)[0]].p[3].u) }}/>
           )}
 
-          {subredditsData?.data && subredditsData?.data?.is_video === true && (
+          {subredditsData?.data?.is_video && subredditsData?.data?.is_video === true && (
             <Video
               ref={video}
               style={styles.video}
@@ -62,6 +62,7 @@ const MyComponent = ({ subredditsData }) => {
               isMuted={false}
               onPlaybackStatusUpdate={status => setStatus(() => status)}
             />
+            // <Text>HEYYYYYYYYYYY</Text>
           )}
         </Card.Content>
 
