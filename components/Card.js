@@ -39,6 +39,14 @@ const MyComponent = ({ subredditsData }) => {
         {subredditsData.data.is_gallery && subredditsData.data.is_gallery === true && (
           <Card.Cover source={{ uri: decode(subredditsData.data.media_metadata[Object.keys(subredditsData.data.media_metadata)[0]].p[3].u) }}/>
         )}
+        
+        {subredditsData.data.is_gallery && subredditsData.data.is_gallery === true && (
+          <Card.Cover source={{ uri: decode(subredditsData.data.media_metadata[Object.keys(subredditsData.data.media_metadata)[0]].p[3].u) }}/>
+        )}
+
+
+
+
 
       </Card.Content>
       

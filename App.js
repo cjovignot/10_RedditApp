@@ -34,7 +34,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator initialRouteName="Home" useLegacyImplementation={true}>
         {/* Pass the separate component to Drawer.Screen */}
         <Drawer.Screen
           name="RealDitters"

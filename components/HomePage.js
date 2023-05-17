@@ -4,7 +4,6 @@ import Card from './Card';
 import Filters from './Filters';
 import axios from 'axios';
 
-import { runOnJS } from 'react-native-reanimated';
 
 function HomePage() {
   const [subredditsData, setSubredditsData] = React.useState([]);
@@ -29,7 +28,7 @@ function HomePage() {
       }
       
       axios.request(options).then(function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         const data = res.data.data.children;
         const newAfter = res.data.data.after; // Get the 'after' value for pagination
         const newSubredditsData = [...subredditsData, ...data];
