@@ -50,7 +50,7 @@ const MyComponent = ({ subredditsData }) => {
             ref={video}
             style={styles.video}
             source={{
-              uri: subredditsData.data.secure_media.reddit_video.fallback_url,
+              uri: subredditsData.data.secure_media.reddit_video.hls_url,
             }}
             useNativeControls
             resizeMode={ResizeMode.CONTAIN}
