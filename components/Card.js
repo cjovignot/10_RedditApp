@@ -34,15 +34,15 @@ const MyComponent = ({ subredditsData }) => {
         <Text variant="titleLarge" numberOfLines={2}  style={[{fontWeight: 'bold'}]}>{subredditsData.data.title}</Text>
         
         {subredditsData.data.preview && subredditsData.data.is_video === false &&
-          <Card.Cover style={[{height: 300}, {width: 'auto'}, {marginTop: 20}]} source={{uri: decode(subredditsData.data.preview?.images[0]?.source?.url)}}/>
+          <Card.Cover style={[{height: 350}, {width: 350}, {marginTop: 20}]} source={{uri: decode(subredditsData.data.preview?.images[0]?.source?.url)}}/>
         }
 
         {subredditsData.data.selftext_html &&
-          <RenderHtml contentWidth={width} source={source}/>
+          <RenderHtml contentWidth={width} source={source} style={[{marginTop: 20}]}/>
         }
 
         {subredditsData.data.is_gallery && subredditsData.data.is_gallery === true && (
-          <Card.Cover source={{ uri: decode(subredditsData.data.media_metadata[Object.keys(subredditsData.data.media_metadata)[0]].p[3].u) }}/>
+          <Card.Cover style={[{height: 350}, {width: 350}, {marginTop: 20}]} source={{ uri: decode(subredditsData.data.media_metadata[Object.keys(subredditsData.data.media_metadata)[0]].p[3].u) }}/>
         )}
 
         {subredditsData.data.is_video && subredditsData.data.is_video === true && (
@@ -59,10 +59,6 @@ const MyComponent = ({ subredditsData }) => {
             onPlaybackStatusUpdate={status => setStatus(() => status)}
           />
         )}
-
-
-
-
       </Card.Content>
       
       <Card.Actions style={[{width: 160}]}>
@@ -71,7 +67,6 @@ const MyComponent = ({ subredditsData }) => {
         <Text variant="titleSmall">{subredditsData.data.score}</Text>
         <IconButton icon="chevron-double-up" size={20} />
 
-        {/* <Button>Explore</Button> */}
       </Card.Actions>
     </Card>
   );
@@ -83,8 +78,9 @@ const styles = StyleSheet.create({
       borderRadius: 4,
     },
     video: {
-      height: 300,
+      height: 350,
       width: 350,
+      marginTop: 20,
     }
 });
 

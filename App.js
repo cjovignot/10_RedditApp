@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 
 import * as React from "react";
-import { Button, View, ScrollView } from "react-native";
+import { Button, View, ScrollView, SafeAreaView } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -59,10 +59,8 @@ export default function App() {
 
 function HomeScreen() {
   return (
-    <ScrollView>
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <HomePage />
-      </View>
-    </ScrollView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <HomePage />
+    </SafeAreaView>
   );
 }
