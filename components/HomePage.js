@@ -20,10 +20,10 @@ function HomePage() {
       }
     }
 
-    if (after) {
-      // Append 'after' parameter to fetch the next page
-      options.url += `?after=${after}`;
-    }
+    // if (after) {
+    //   // Append 'after' parameter to fetch the next page
+    //   options.url += `?after=${after}`;
+    // }
 
     axios.request(options).then(function (res) {
       console.log(res.data)
@@ -43,11 +43,11 @@ function HomePage() {
     fetchData();
   }, []);
 
-  const handleLoadMore = () => {
-    if (after) {
-      fetchData(after);
-    }
-  };
+  // const handleLoadMore = () => {
+  //   if (after) {
+  //     fetchData(after);
+  //   }
+  // };
 
   return (
     <View>
@@ -56,8 +56,8 @@ function HomePage() {
         data={subredditsData}
         renderItem={({ item }) => <Card subredditsData={item} />}
         keyExtractor={(item, index) => index.toString()}
-        onEndReached={handleLoadMore}
-        onEndReachedThreshold={0.5}
+        // onEndReached={handleLoadMore}
+        // onEndReachedThreshold={0.5}
       />
     </View>
   );
