@@ -21,17 +21,16 @@ function HomePage() {
     }
 
     if (after) {
-      // Append 'after' parameter to fetch the next page
       options.url += `?after=${after}`;
     }
       
     axios.request(options).then(function (res) {
       const data = res.data.data.children;
-      const newAfter = res.data.data.after; // Get the 'after' value for pagination
+      const newAfter = res.data.data.after;
       const newSubredditsData = [...subredditsData, ...data];
       setSubredditsData(newSubredditsData);
       setImageUrl(newSubredditsData.map(item => item.data));
-      setAfter(newAfter); // Update the 'after' value for pagination
+      setAfter(newAfter);
     }).catch(function (error) {
       console.error(error);
     });
@@ -60,7 +59,7 @@ function HomePage() {
         renderItem={({ item }) => <Card subredditsData={item} />}
         keyExtractor={(item, index) => index.toString()}
         onEndReached={handleLoadMore}
-        onEndReachedThreshold={0.3}
+        onEndReachedThreshold={0.4}
       />
     </>
   );

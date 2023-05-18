@@ -11,6 +11,7 @@ import ProfileScreen from "./components/ProfileScreen";
 import MySubredditList from "./components/MySubredditList";
 import PostList from "./components/Postlist";
 import HomePage from "./components/HomePage";
+import Filters from './components/Filters';
 
 function RealDittersStack() {
   return (
@@ -67,6 +68,7 @@ function HomeScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      {/* <Filters /> */}
       <HomePage />
     </SafeAreaView>
   );

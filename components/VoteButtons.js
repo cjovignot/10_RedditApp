@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, View, Image, useWindowDimensions } from 'react-native';
-import { Avatar, Button, Card, Text, IconButton } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Card, Text, IconButton } from 'react-native-paper';
 import axios from 'axios';
 
 const MyComponent = ({ subredditsData }) => {
@@ -26,13 +26,11 @@ const MyComponent = ({ subredditsData }) => {
     if (upVoted === false) {
       axios.request(options)
       .then(response => {
-        // Handle successful vote response
           setUpVoted(true)
           console.log(response.data);
           console.log("upVote successfull", subredditsData.data.score +1);
         })
         .catch(error => {
-          // Handle vote error
           console.error(error);
         });
     } else if (upVoted === true) {
@@ -52,13 +50,11 @@ const MyComponent = ({ subredditsData }) => {
 
       axios.request(options)
         .then(response => {
-          // Handle successful vote response
           console.log(response.data);
           setUpVoted(false);
           console.log("Unvote successfull", subredditsData.data.score);
         })
         .catch(error => {
-          // Handle vote error
           console.error(error);
         });
     }
@@ -82,13 +78,11 @@ const MyComponent = ({ subredditsData }) => {
     if (downVoted === false) {
       axios.request(options)
         .then(response => {
-          // Handle successful vote response
           console.log(response.data);
           setDownVoted(true)
           console.log("downVote successfull", subredditsData.data.score -1);
         })
         .catch(error => {
-          // Handle vote error
           console.error(error);
         });
     } else if (downVoted === true) {
@@ -108,13 +102,11 @@ const MyComponent = ({ subredditsData }) => {
 
       axios.request(options)
         .then(response => {
-          // Handle successful vote response
           setDownVoted(false);
           console.log(response.data);
           console.log("UnDownVote successfull", subredditsData.data.score);
         })
         .catch(error => {
-          // Handle vote error
           console.error(error);
         });
     }
