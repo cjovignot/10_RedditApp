@@ -30,8 +30,6 @@ const MyComponent = ({ subredditsData }) => {
           setUpVoted(true)
           console.log(response.data);
           console.log("upVote successfull", subredditsData.data.score +1);
-          console.log("UP", upVoted)
-          console.log("DOWN", downVoted)
         })
         .catch(error => {
           // Handle vote error
@@ -58,8 +56,6 @@ const MyComponent = ({ subredditsData }) => {
           console.log(response.data);
           setUpVoted(false);
           console.log("Unvote successfull", subredditsData.data.score);
-          console.log("UP", upVoted)
-          console.log("DOWN", downVoted)
         })
         .catch(error => {
           // Handle vote error
@@ -139,9 +135,6 @@ const MyComponent = ({ subredditsData }) => {
             size={20}
             onPress={() => downVote()}
           />
-        }
-        {upVoted === true && downVoted === true &&
-          <Text variant="titleSmall">{subredditsData.data.score}</Text>
         }
 
         {upVoted === false && downVoted === false &&
