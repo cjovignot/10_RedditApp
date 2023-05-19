@@ -32,12 +32,12 @@ function HomePage() {
 
     // Fetch new data based on the selected filter
     if (best === true) {
-      console.log(subredditsData, "in best")
-      console.log(newSubredditsData, "new in best")
-      console.log("best fetch", best);
-      console.log("best ok");
+      // console.log(subredditsData, "in best")
+      // console.log(newSubredditsData, "new in best")
+      // console.log("best fetch", best);
+      // console.log("best ok");
       const fetchData = (after = null) => {
-        const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0NDkxMjA0LCJpYXQiOjE2ODQ0MDQ4MDQsImp0aSI6IjMxOTc5NTQ5MTc4OTI5LVJ6N1lqVzZuUENFZUFydUF2Y3EyelFqU3FYQjRtUSIsImNpZCI6ImlBanJEc0x5Rl9FU3RHSWFONDVOZ1EiLCJsaWQiOiJ0Ml9iYzM3OXc2NXQiLCJhaWQiOiJ0Ml9iYzM3OXc2NXQiLCJsY2EiOjE2ODQxNDg3ODc0MjAsInNjcCI6ImVKeUtWdEpTaWdVRUFBRF9fd056QVNjIiwiZmxvIjo5fQ.lz6ChgLuUy8MxKl47CxUrYJpetuJosJX-U58t9Yij0NkZH4qPyMjs5i0ux9YvsovQ48w0WMjcbQuUK_rYiT_1cx5ePCkqN3Ev1r1O-tzbMxMwUXEGq2yQrXq4PWlIgjIpvTPs2hlFlRa82HOda_d5EipgZLkBWgJXzBWCcpYi4C0M_GccclDwlIfxhTn4Ewh64ZtmZ4o_SuXIkFQMHatsR55x-vXKCuYRMlmj6Lw3CvNt-pboECgRC7mrFdnOzXcFPMyHpHMwtQU9ak0qk3TjbYXYzyiixNabLet0tSexfARzvfMo0gIkIvsyNVNuLG2PGRAAGNPhxWZX_bDVxxeDw';
+        const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0NTc3NDYxLjQ1MTgyMiwiaWF0IjoxNjg0NDkxMDYxLjQ1MTgyMiwianRpIjoiMzE5Nzk1NDkxNzg5MjktUG9RODNPX0twcDNTQmxPM215Z3E5aVdyNnNxblZ3IiwiY2lkIjoiaUFqckRzTHlGX0VTdEdJYU40NU5nUSIsImxpZCI6InQyX2JjMzc5dzY1dCIsImFpZCI6InQyX2JjMzc5dzY1dCIsImxjYSI6MTY4NDE0ODc4NzQyMCwic2NwIjoiZUp5S1Z0SlNpZ1VFQUFEX193TnpBU2MiLCJmbG8iOjl9.PjXYz1SuHZ7Jw4KiMXUP1uGnqfMdwbrXtR7ZCwjgUsyA13YD56Nm-QftKSMLBF03S6ZrIeLrNkKM1fT3IROcnYUB8hzNP62MrzJWKR6cJoLUwf032E2-Nm8LRqaA3lUYoCCbzKEnTWC8iNw-4voqxZbudhUonR3-Zun3Z-PFDjHdU9pQZLhZl9RB3325QK9EHO9qLrNLlLum0Nu0OqTCyj84Gezxfi7sxkeMet08A9q2gnEWQy5OeOfG7YHMXF0OypUe41yzqpFVzHVsMofkXdQmENLSalH02JsXRu-3BsRMCLVVOxnRsNF4h48aWCguXEE3w87UJqmhGK3qs3nnlg';
 
         const options = {
           method: 'GET',
@@ -55,7 +55,7 @@ function HomePage() {
           const data = res.data.data.children;
           const newAfter = res.data.data.after;
           const newSubredditsData = [...subredditsData, ...data];
-          console.log(newSubredditsData, "new in best after set")
+          // console.log(newSubredditsData, "new in best after set")
           setSubredditsData(newSubredditsData);
           // console.log(newSubredditsData, "BEST DATA")
           // setImageUrl(newSubredditsData.map(item => item.data));
@@ -67,12 +67,12 @@ function HomePage() {
       fetchData();
 
     } else if (hot === true) {
-      console.log(subredditsData, "in hot")
-      console.log(newSubredditsData, "new in hot")
-      console.log("hot fetch", hot);
-      console.log("hot ok");
+      // console.log(subredditsData, "in hot")
+      // console.log(newSubredditsData, "new in hot")
+      // console.log("hot fetch", hot);
+      // console.log("hot ok");
       const fetchHot = (after = null) => {
-        const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0NDkxMjA0LCJpYXQiOjE2ODQ0MDQ4MDQsImp0aSI6IjMxOTc5NTQ5MTc4OTI5LVJ6N1lqVzZuUENFZUFydUF2Y3EyelFqU3FYQjRtUSIsImNpZCI6ImlBanJEc0x5Rl9FU3RHSWFONDVOZ1EiLCJsaWQiOiJ0Ml9iYzM3OXc2NXQiLCJhaWQiOiJ0Ml9iYzM3OXc2NXQiLCJsY2EiOjE2ODQxNDg3ODc0MjAsInNjcCI6ImVKeUtWdEpTaWdVRUFBRF9fd056QVNjIiwiZmxvIjo5fQ.lz6ChgLuUy8MxKl47CxUrYJpetuJosJX-U58t9Yij0NkZH4qPyMjs5i0ux9YvsovQ48w0WMjcbQuUK_rYiT_1cx5ePCkqN3Ev1r1O-tzbMxMwUXEGq2yQrXq4PWlIgjIpvTPs2hlFlRa82HOda_d5EipgZLkBWgJXzBWCcpYi4C0M_GccclDwlIfxhTn4Ewh64ZtmZ4o_SuXIkFQMHatsR55x-vXKCuYRMlmj6Lw3CvNt-pboECgRC7mrFdnOzXcFPMyHpHMwtQU9ak0qk3TjbYXYzyiixNabLet0tSexfARzvfMo0gIkIvsyNVNuLG2PGRAAGNPhxWZX_bDVxxeDw';
+        const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0NTc3NDYxLjQ1MTgyMiwiaWF0IjoxNjg0NDkxMDYxLjQ1MTgyMiwianRpIjoiMzE5Nzk1NDkxNzg5MjktUG9RODNPX0twcDNTQmxPM215Z3E5aVdyNnNxblZ3IiwiY2lkIjoiaUFqckRzTHlGX0VTdEdJYU40NU5nUSIsImxpZCI6InQyX2JjMzc5dzY1dCIsImFpZCI6InQyX2JjMzc5dzY1dCIsImxjYSI6MTY4NDE0ODc4NzQyMCwic2NwIjoiZUp5S1Z0SlNpZ1VFQUFEX193TnpBU2MiLCJmbG8iOjl9.PjXYz1SuHZ7Jw4KiMXUP1uGnqfMdwbrXtR7ZCwjgUsyA13YD56Nm-QftKSMLBF03S6ZrIeLrNkKM1fT3IROcnYUB8hzNP62MrzJWKR6cJoLUwf032E2-Nm8LRqaA3lUYoCCbzKEnTWC8iNw-4voqxZbudhUonR3-Zun3Z-PFDjHdU9pQZLhZl9RB3325QK9EHO9qLrNLlLum0Nu0OqTCyj84Gezxfi7sxkeMet08A9q2gnEWQy5OeOfG7YHMXF0OypUe41yzqpFVzHVsMofkXdQmENLSalH02JsXRu-3BsRMCLVVOxnRsNF4h48aWCguXEE3w87UJqmhGK3qs3nnlg';
 
         const options = {
           method: 'GET',
@@ -90,7 +90,7 @@ function HomePage() {
           const data = res.data.data.children;
           const newAfter = res.data.data.after;
           const newSubredditsData = [...subredditsData, ...data];
-          console.log(newSubredditsData, "new in hot after set")
+          // console.log(newSubredditsData, "new in hot after set")
           setSubredditsData(newSubredditsData);
           // console.log(newSubredditsData, "HOT DATA")
           // setImageUrl(newSubredditsData.map(item => item.data));
@@ -101,12 +101,12 @@ function HomePage() {
       };
       fetchHot();
     } else if (news === true) {
-      console.log(subredditsData, "in news")
-      console.log(newSubredditsData, "new in news")
-      console.log("news fetch", news);
-      console.log("news ok");
+      // console.log(subredditsData, "in news")
+      // console.log(newSubredditsData, "new in news")
+      // console.log("news fetch", news);
+      // console.log("news ok");
       const fetchNews = (after = null) => {
-        const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0NDkxMjA0LCJpYXQiOjE2ODQ0MDQ4MDQsImp0aSI6IjMxOTc5NTQ5MTc4OTI5LVJ6N1lqVzZuUENFZUFydUF2Y3EyelFqU3FYQjRtUSIsImNpZCI6ImlBanJEc0x5Rl9FU3RHSWFONDVOZ1EiLCJsaWQiOiJ0Ml9iYzM3OXc2NXQiLCJhaWQiOiJ0Ml9iYzM3OXc2NXQiLCJsY2EiOjE2ODQxNDg3ODc0MjAsInNjcCI6ImVKeUtWdEpTaWdVRUFBRF9fd056QVNjIiwiZmxvIjo5fQ.lz6ChgLuUy8MxKl47CxUrYJpetuJosJX-U58t9Yij0NkZH4qPyMjs5i0ux9YvsovQ48w0WMjcbQuUK_rYiT_1cx5ePCkqN3Ev1r1O-tzbMxMwUXEGq2yQrXq4PWlIgjIpvTPs2hlFlRa82HOda_d5EipgZLkBWgJXzBWCcpYi4C0M_GccclDwlIfxhTn4Ewh64ZtmZ4o_SuXIkFQMHatsR55x-vXKCuYRMlmj6Lw3CvNt-pboECgRC7mrFdnOzXcFPMyHpHMwtQU9ak0qk3TjbYXYzyiixNabLet0tSexfARzvfMo0gIkIvsyNVNuLG2PGRAAGNPhxWZX_bDVxxeDw';
+        const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0NTc3NDYxLjQ1MTgyMiwiaWF0IjoxNjg0NDkxMDYxLjQ1MTgyMiwianRpIjoiMzE5Nzk1NDkxNzg5MjktUG9RODNPX0twcDNTQmxPM215Z3E5aVdyNnNxblZ3IiwiY2lkIjoiaUFqckRzTHlGX0VTdEdJYU40NU5nUSIsImxpZCI6InQyX2JjMzc5dzY1dCIsImFpZCI6InQyX2JjMzc5dzY1dCIsImxjYSI6MTY4NDE0ODc4NzQyMCwic2NwIjoiZUp5S1Z0SlNpZ1VFQUFEX193TnpBU2MiLCJmbG8iOjl9.PjXYz1SuHZ7Jw4KiMXUP1uGnqfMdwbrXtR7ZCwjgUsyA13YD56Nm-QftKSMLBF03S6ZrIeLrNkKM1fT3IROcnYUB8hzNP62MrzJWKR6cJoLUwf032E2-Nm8LRqaA3lUYoCCbzKEnTWC8iNw-4voqxZbudhUonR3-Zun3Z-PFDjHdU9pQZLhZl9RB3325QK9EHO9qLrNLlLum0Nu0OqTCyj84Gezxfi7sxkeMet08A9q2gnEWQy5OeOfG7YHMXF0OypUe41yzqpFVzHVsMofkXdQmENLSalH02JsXRu-3BsRMCLVVOxnRsNF4h48aWCguXEE3w87UJqmhGK3qs3nnlg';
 
         const options = {
           method: 'GET',
@@ -124,7 +124,7 @@ function HomePage() {
           const data = res.data.data.children;
           const newAfter = res.data.data.after;
           const newSubredditsData = [...subredditsData, ...data];
-          console.log(newSubredditsData, "new in news after set")
+          // console.log(newSubredditsData, "new in news after set")
           setSubredditsData(newSubredditsData);
           // console.log(newSubredditsData, "NEWs DATA")
           // setImageUrl(newSubredditsData.map(item => item.data));

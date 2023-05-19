@@ -5,11 +5,20 @@ import RenderHtml from 'react-native-render-html';
 import {decode} from 'html-entities';
 import { Video, ResizeMode } from 'expo-av';
 import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 
 import VoteButtons from '../components/VoteButtons';
+import Comments from '../components/Comments';
+
+import { ScrollView } from 'react-native-gesture-handler';
 
 
-const MyComponent = ({ subredditsData }) => {
+const MyComponent = () => {
+    const route = useRoute();
+    const subredditsData = route.params.subredditsData;
+  
+    console.log(subredditsData);
+
   const navigation = useNavigation();
   const { width } = useWindowDimensions();
 
@@ -22,24 +31,14 @@ const MyComponent = ({ subredditsData }) => {
   };
 
   return (
+    <ScrollView>
       <Card style={styles.card}>
       
         <IconButton icon="bell-outline" size={25} style={[{justifyContent: 'flex-start'}]}/>
         <Card.Content>
           
-          <Text variant="titleSmall" style={[{color: 'grey'}, {fontStyle: 'italic'}]}
-            onPress={() =>
-              navigation.navigate("Postlist", {
-                subreddit: subredditsData?.data?.subreddit,
-              })
-            }
-          >{subredditsData?.data?.subreddit_name_prefixed}</Text>
-          <Text variant="titleLarge" numberOfLines={2} style={[{fontWeight: 'bold'}]}
-            onPress={() =>
-              navigation.navigate("PostView", {
-                subredditsData: subredditsData,
-              })
-            }>{subredditsData?.data?.title}</Text>
+          <Text variant="titleSmall" style={[{color: 'grey'}, {fontStyle: 'italic'}]}>{subredditsData?.data?.subreddit_name_prefixed}</Text>
+          <Text variant="titleLarge" numberOfLines={2} style={[{fontWeight: 'bold'}]}>{subredditsData?.data?.title}</Text>
           
           {subredditsData?.data?.preview && subredditsData?.data?.is_video === false &&
             <Card.Cover style={[{height: 350}, {width: 'auto'}, {marginTop: 20}]} source={{uri: decode(subredditsData?.data?.preview?.images[0]?.source?.url)}}/>
@@ -66,13 +65,16 @@ const MyComponent = ({ subredditsData }) => {
               isMuted={false}
               onPlaybackStatusUpdate={status => setStatus(() => status)}
             />
-            // <Text>HEYYYYYYYYYYY</Text>
           )}
+
+          <VoteButtons subredditsData={subredditsData}/>
+
         </Card.Content>
 
-        <VoteButtons subredditsData={subredditsData}/>
 
       </Card>
+
+    </ScrollView>
   );
 };
 

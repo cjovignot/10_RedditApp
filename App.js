@@ -10,6 +10,7 @@ import { Provider as PaperProvider, IconButton } from "react-native-paper";
 import ProfileScreen from "./components/ProfileScreen";
 import MySubredditList from "./components/MySubredditList";
 import PostList from "./components/Postlist";
+import UnitPost from "./components/UnitPost";
 import HomePage from "./components/HomePage";
 import Filters from './components/Filters';
 
@@ -31,6 +32,11 @@ function RealDittersStack() {
         name="Subreddit"
         component={PostList}
         options={{ title: "My home" }}
+      />
+      <Stack.Screen
+        name="PostView"
+        component={UnitPost}
+        options={{ title: "PostView" }}
       />
     </Stack.Navigator>
   );
