@@ -1,7 +1,13 @@
 import "react-native-gesture-handler";
 
 import * as React from "react";
-import { Button, View, ScrollView, SafeAreaView, StyleSheet } from "react-native";
+import {
+  Button,
+  View,
+  ScrollView,
+  SafeAreaView,
+  StyleSheet,
+} from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -12,15 +18,16 @@ import MySubredditList from "./components/MySubredditList";
 import PostList from "./components/Postlist";
 import UnitPost from "./components/UnitPost";
 import HomePage from "./components/HomePage";
-import Filters from './components/Filters';
+import SearchBar from "./components/Search";
+import Filters from "./components/Filters";
 
 function RealDittersStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Ditters"
+        name="noDitters"
         component={HomeScreen}
-        options={{ headerShown: false, drawerBarLabel: "prout" }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen
@@ -50,17 +57,18 @@ export default function App() {
       <Drawer.Navigator initialRouteName="Home" useLegacyImplementation={true}>
         {/* Pass the separate component to Drawer.Screen */}
         <Drawer.Screen
-          name="RealDitters"
+          name="Ditters"
           component={RealDittersStack}
           options={({ navigation }) => ({
             headerRight: () => (
-              <>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <SearchBar navigation={navigation} />
                 <IconButton
                   icon="account-circle"
                   size={28}
                   onPress={() => navigation.navigate("Profile")}
                 />
-              </>
+              </View>
             ),
           })}
         />
@@ -71,7 +79,6 @@ export default function App() {
 }
 
 function HomeScreen() {
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* <Filters /> */}

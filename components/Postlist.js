@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Text, View, ScrollView, StyleSheet } from "react-native";
 import { Provider as PaperProvider, IconButton } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
 
-import Card from '../components/Card';
+import Card from "../components/Card";
 
 import { Button } from "react-native-paper";
 import axios from "axios";
@@ -25,6 +26,7 @@ const Postlist = ({ route, navigation }) => {
 
   const fetchData = async (afterParam = null) => {
     try {
+      setPosts([]);
       const response = afterParam
         ? await api.get(`/r/${subreddit}/hot`, {
             params: { after: afterParam },
@@ -37,10 +39,12 @@ const Postlist = ({ route, navigation }) => {
     }
   };
 
-  React.useEffect(() => {
-    fetchData();
-    navigation.setOptions({ title: subreddit });
-  }, [subreddit]);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchData();
+      navigation.setOptions({ title: subreddit });
+    }, [subreddit])
+  );
 
   const loadMorePosts = () => {
     fetchData(after);
@@ -58,9 +62,10 @@ const Postlist = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView onScroll={ScrollOffset} ref={scrollViewRef}>
-        {posts && posts.map((post, index) => (
-          <Card key={index} subredditsData={post}/>
-        ))}
+        {posts &&
+          posts.map((post, index) => (
+            <Card key={index} subredditsData={post} />
+          ))}
 
         <View style={styles.loader}>
           <Button
@@ -69,7 +74,9 @@ const Postlist = ({ route, navigation }) => {
             buttonColor="black"
             dark={true}
             onPress={loadMorePosts}
-            style={{ maxWidth: 200, margin: 20 }} >Load More
+            style={{ maxWidth: 200, margin: 20 }}
+          >
+            Load More
           </Button>
         </View>
       </ScrollView>
@@ -79,7 +86,6 @@ const Postlist = ({ route, navigation }) => {
           <IconButton icon="arrow-up-bold-box" size={40} onPress={Topscroll} />
         )}
       </View>
-      
     </View>
   );
 };
