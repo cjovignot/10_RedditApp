@@ -19,7 +19,6 @@ import PostList from "./components/Postlist";
 import UnitPost from "./components/UnitPost";
 import HomePage from "./components/HomePage";
 import SearchBar from "./components/Search";
-import Filters from "./components/Filters";
 
 function RealDittersStack() {
   return (
@@ -61,8 +60,8 @@ export default function App() {
           component={RealDittersStack}
           options={({ navigation }) => ({
             headerRight: () => (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <SearchBar navigation={navigation} />
+              <View style={{ flexDirection: "row" }}>
+                <SearchBar navigation={navigation}/>
                 <IconButton
                   icon="account-circle"
                   size={28}
@@ -72,7 +71,7 @@ export default function App() {
             ),
           })}
         />
-        <Drawer.Screen name="My Subreddits" component={MySubredditList} />
+        <Drawer.Screen name="My Subreddits" component={MySubredditList}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -81,7 +80,6 @@ export default function App() {
 function HomeScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {/* <Filters /> */}
       <HomePage />
     </SafeAreaView>
   );

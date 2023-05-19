@@ -57,18 +57,18 @@ const SearchComponent = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   search: {
-    width: 200,
-    borderRadius: 0,
+    // flex: 1,
+    width: 270,
+    height: 40,
+    borderRadius: 8,
+    // backgroundColor: "grey",
   },
   item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+    padding: 8,
+    fontSize: 15,
+    // height: 30,
     backgroundColor: "white",
   },
-  //   resultContainer: {
-  //     marginTop: 50, // adjust this as needed
-  //   },
 });
 
 export default SearchComponent;
