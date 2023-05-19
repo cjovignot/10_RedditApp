@@ -10,6 +10,7 @@ import ProfileScreen from "./components/ProfileScreen";
 import MySubredditList from "./components/MySubredditList";
 import PostList from "./components/Postlist";
 import HomePage from "./components/HomePage";
+import SearchBar from "./components/Search";
 
 function RealDittersStack() {
   return (
@@ -17,7 +18,7 @@ function RealDittersStack() {
       <Stack.Screen
         name="Ditters"
         component={HomeScreen}
-        options={{ headerShown: false, drawerBarLabel: "prout" }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen
@@ -37,17 +38,18 @@ export default function App() {
       <Drawer.Navigator initialRouteName="Home" useLegacyImplementation={true}>
         {/* Pass the separate component to Drawer.Screen */}
         <Drawer.Screen
-          name="RealDitters"
+          name="Ditters"
           component={RealDittersStack}
           options={({ navigation }) => ({
             headerRight: () => (
-              <>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <SearchBar navigation={navigation} />
                 <IconButton
                   icon="account-circle"
                   size={28}
                   onPress={() => navigation.navigate("Profile")}
                 />
-              </>
+              </View>
             ),
           })}
         />

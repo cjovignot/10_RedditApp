@@ -3,6 +3,7 @@
     "name": "redditech",
     "slug": "redditech",
     "version": "1.0.0",
+    "scheme": "redditech",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

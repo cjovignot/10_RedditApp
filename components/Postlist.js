@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Text, View, ScrollView, StyleSheet } from "react-native";
 import { Provider as PaperProvider, IconButton } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
 
 import { Button } from "react-native-paper";
 import axios from "axios";
@@ -17,12 +18,13 @@ const Postlist = ({ route, navigation }) => {
   const api = axios.create({
     baseURL: "https://oauth.reddit.com",
     headers: {
-      Authorization: `Bearer ${"eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0MzI2MDQ4LCJpYXQiOjE2ODQyMzk2NDgsImp0aSI6IjMwMjgyNzQ4MzIzOC14OXRkM3A3czIzcjBhVk8yWnVKWG1wV0kxTFBBNmciLCJjaWQiOiJMbUtZMkJiRkpzcGgzZmdvaGV1ME13IiwibGlkIjoidDJfM3Y0N254aWUiLCJhaWQiOiJ0Ml8zdjQ3bnhpZSIsImxjYSI6MTU1OTI3NzA0MjExNywic2NwIjoiZUp5S1Z0SlNpZ1VFQUFEX193TnpBU2MifQ.zzFlv3-CBBa2C0Lhw7rrh7gJSOvlVESRw5_jMDvoPIKu4T3ZLKLXfThIK9q6y2E7nQAY1ZLySZ1SOUA8EphrAhkGL2KR1nhsh30i9vFljCKJR-VMh9P42L8UAuT1LAbpozY_AqvxUUIqHcWmVSmsPjdxNhZc3yhkjbiXyCebr1WfUCRP278o77eDiCTgtO9awSeqZk_eJwZ3qo6_Fl8XG7_EqkvmeMgdTdeywnx2ExsFgb0Gn4mZxOqhYnSHfSPQ7spgYZ-idfkrg2NZe01YmAT6Gw60R8N6CaC1uxRLqRJdkNfNRHkhZMKfDY1NDwoeg6D7UBcz5vqRBokOxuMwAQ"}`,
+      Authorization: `Bearer ${"eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0NTA5NTk1LCJpYXQiOjE2ODQ0MjMxOTUsImp0aSI6IjMwMjgyNzQ4MzIzOC1DTlpZTGVTSFE3RjdYd1E1TE04OWRCRXFEZmw4MmciLCJjaWQiOiJMbUtZMkJiRkpzcGgzZmdvaGV1ME13IiwibGlkIjoidDJfM3Y0N254aWUiLCJhaWQiOiJ0Ml8zdjQ3bnhpZSIsImxjYSI6MTU1OTI3NzA0MjExNywic2NwIjoiZUp5S1Z0SlNpZ1VFQUFEX193TnpBU2MiLCJmbG8iOjl9.06PpEAfQpzSmzBgStZLk9B-_IVhS-PgazV9ReD_DntA0HZ-MwjLTHUfmab2Rti-RFe-tK8YMIEfgRlENPdaEbqZBMyAQFecDQL30NqqArp4S56H65Sqd8AapYJMsUNWCA8Glsn2Hs_5u8fvr9bTHnGX2iWwIZXH62ttaO_F6J4qywo3v2xsweAEuL9fzrPjFSkN4NUMQQMkzSu3oWjV0NIR4efwDEbTvLQfYyKtgdD6bs6ecQv1zI3G7KwR6gjiWV7Z_Yq5aAHmmfBhQWh1mMy7AWYIFdmJ0p2oVXFJzeZQeG2828a7yQzwoaXMCB51lyOz8kCunAc88C0TWrDdYXA"}`,
     },
   });
 
   const fetchData = async (afterParam = null) => {
     try {
+      setPosts([]);
       const response = afterParam
         ? await api.get(`/r/${subreddit}/hot`, {
             params: { after: afterParam },
@@ -35,10 +37,12 @@ const Postlist = ({ route, navigation }) => {
     }
   };
 
-  React.useEffect(() => {
-    fetchData();
-    navigation.setOptions({ title: subreddit });
-  }, [subreddit]);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchData();
+      navigation.setOptions({ title: subreddit });
+    }, [subreddit])
+  );
 
   const loadMorePosts = () => {
     fetchData(after);
