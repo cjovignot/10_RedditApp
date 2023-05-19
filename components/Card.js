@@ -42,6 +42,11 @@ const MyComponent = ({ subredditsData }) => {
           variant="titleLarge"
           numberOfLines={2}
           style={[{ fontWeight: "bold" }]}
+          onPress={() =>
+            navigation.navigate("PostView", {
+              subredditsData: subredditsData,
+            })
+          }
         >
           {subredditsData?.data?.title}
         </Text>
