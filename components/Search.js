@@ -59,7 +59,7 @@ const SearchComponent = ({ navigation }) => {
 const styles = StyleSheet.create({
   search: {
     borderRadius: 8,
-    width: 270,
+    width: 250,
     marginTop: 6,
     height: 40,
     borderWidth: 1,
