@@ -5,12 +5,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button } from "react-native";
 import { Buffer } from "buffer";
 import Toast from "react-native-root-toast";
+import { REDDIT_CLIENT_ID, REDDIT_SECRET_KEY } from "@env";
 
 WebBrowser.maybeCompleteAuthSession();
 
 async function exchangeCodeForToken(code, redirectUri) {
   try {
-    const authString = `${"0vmtawCIYUhfp9ceF-6v9Q"}:${"m3B8Obw0XXjbOdTw_MT2-iVj6Nfh0w"}`;
+    const authString = `${REDDIT_CLIENT_ID}:${REDDIT_SECRET_KEY}`;
     const encodedAuthString = Buffer.from(authString).toString("base64");
 
     const response = await fetch("https://www.reddit.com/api/v1/access_token", {
@@ -44,10 +45,24 @@ const discovery = {
 };
 
 export default function App({ FetchDetails, setData, data }) {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  async function checkUserToken() {
+    const token = await AsyncStorage.getItem("UserToken");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }
+
+  React.useEffect(() => {
+    checkUserToken();
+  }, []);
   async function Logout() {
     try {
       await AsyncStorage.removeItem("UserToken");
       await AsyncStorage.removeItem("UserCode");
+      setIsLoggedIn(false);
+      setData(undefined);
       console.log("JESUISLA");
       console.log("JESUISPASLA");
     } catch (error) {
@@ -65,7 +80,7 @@ export default function App({ FetchDetails, setData, data }) {
 
   const [request, response, promptAsync] = useAuthRequest(
     {
-      clientId: "0vmtawCIYUhfp9ceF-6v9Q",
+      clientId: `${REDDIT_CLIENT_ID}`,
       scopes: ["identity"],
       redirectUri: redirectUri,
     },
@@ -91,6 +106,7 @@ export default function App({ FetchDetails, setData, data }) {
             console.log("Display Name: ", data.name);
             AsyncStorage.setItem("UserName", data.name);
             FetchDetails();
+            setIsLoggedIn(true);
             Toast.show("Welcome back, " + data.name, {
               duration: Toast.durations.LONG,
               position: Toast.positions.BOTTOM,
@@ -109,20 +125,24 @@ export default function App({ FetchDetails, setData, data }) {
 
   return (
     <>
-      <Button
-        disabled={!request}
-        title="Login"
-        onPress={() => {
-          promptAsync();
-        }}
-      />
-      <Button
-        disabled={!request}
-        title="Logout"
-        onPress={() => {
-          Logout();
-        }}
-      />
+      {!isLoggedIn && (
+        <Button
+          disabled={!request}
+          title="Login"
+          onPress={() => {
+            promptAsync();
+          }}
+        />
+      )}
+      {isLoggedIn && (
+        <Button
+          disabled={!request}
+          title="Logout"
+          onPress={() => {
+            Logout();
+          }}
+        />
+      )}
     </>
   );
 }

@@ -13,26 +13,33 @@ function ProfileScreen() {
   async function FetchDetails() {
     var token = await AsyncStorage.getItem("UserToken");
     setToken(token);
-    axios({
-      method: "get",
-      url: `https://oauth.reddit.com/api/v1/me`,
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    }).then((response) => {
-      setData(response.data);
-      console.log(data.icon_img);
-    });
+    if (token) {
+      axios({
+        method: "get",
+        url: `https://oauth.reddit.com/api/v1/me`,
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      }).then((response) => {
+        setData(response.data);
+      });
+    } else {
+      setData(undefined);
+    }
   }
 
   useEffect(() => {
     FetchDetails();
-  }, []);
+  }, [token]);
 
-  if (data === undefined) {
+  if (!token) {
     return (
       <>
-        <RedditLogin FetchDetails={FetchDetails} setData={setData} />
+        <RedditLogin
+          FetchDetails={FetchDetails}
+          setData={setData}
+          data={data}
+        />
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
@@ -43,29 +50,28 @@ function ProfileScreen() {
     );
   }
 
-  // const timestamp = data.created_utc;
-  // const date = new Date(timestamp * 1000);
-  // const options = { month: "short", day: "numeric", year: "numeric" };
-  // const formattedDate = date.toLocaleDateString("en-US", options);
-
   return (
     <>
-      <RedditLogin />
+      <RedditLogin FetchDetails={FetchDetails} setData={setData} data={data} />
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Avatar.Image
-          size={128}
-          source={{
-            uri: `${data.icon_img.slice(0, data.icon_img.indexOf("?"))}`,
-          }}
-        />
+        {data && data.icon_img && (
+          <Avatar.Image
+            size={128}
+            source={{
+              uri: `${data.icon_img.slice(0, data.icon_img.indexOf("?"))}`,
+            }}
+          />
+        )}
         <Text>This is the profile screen</Text>
-        <Text>{data.subreddit.title}</Text>
-        <Text>{data.subreddit.display_name_prefixed}</Text>
-        <Text>{data.subreddit.subscribers} abonnés</Text>
-
-        <Text>{data.subreddit.public_description}</Text>
-        <Text>{data.link_karma} karma</Text>
-        {/* <Text>{formattedDate}</Text> */}
+        {data && data.subreddit && (
+          <>
+            <Text>{data.subreddit.title}</Text>
+            <Text>{data.subreddit.display_name_prefixed}</Text>
+            <Text>{data.subreddit.subscribers} abonnés</Text>
+            <Text>{data.subreddit.public_description}</Text>
+          </>
+        )}
+        {data && <Text>{data.link_karma} karma</Text>}
       </View>
     </>
   );
