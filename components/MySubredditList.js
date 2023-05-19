@@ -1,5 +1,12 @@
 import * as React from "react";
 import { Drawer } from "react-native-paper";
+import {
+  Button,
+  View,
+  ScrollView,
+  SafeAreaView,
+  StyleSheet,
+} from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
@@ -10,7 +17,7 @@ const MySubRedditList = () => {
   const api = axios.create({
     baseURL: "https://oauth.reddit.com",
     headers: {
-      Authorization: `Bearer ${"eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0NTA5NTk1LCJpYXQiOjE2ODQ0MjMxOTUsImp0aSI6IjMwMjgyNzQ4MzIzOC1DTlpZTGVTSFE3RjdYd1E1TE04OWRCRXFEZmw4MmciLCJjaWQiOiJMbUtZMkJiRkpzcGgzZmdvaGV1ME13IiwibGlkIjoidDJfM3Y0N254aWUiLCJhaWQiOiJ0Ml8zdjQ3bnhpZSIsImxjYSI6MTU1OTI3NzA0MjExNywic2NwIjoiZUp5S1Z0SlNpZ1VFQUFEX193TnpBU2MiLCJmbG8iOjl9.06PpEAfQpzSmzBgStZLk9B-_IVhS-PgazV9ReD_DntA0HZ-MwjLTHUfmab2Rti-RFe-tK8YMIEfgRlENPdaEbqZBMyAQFecDQL30NqqArp4S56H65Sqd8AapYJMsUNWCA8Glsn2Hs_5u8fvr9bTHnGX2iWwIZXH62ttaO_F6J4qywo3v2xsweAEuL9fzrPjFSkN4NUMQQMkzSu3oWjV0NIR4efwDEbTvLQfYyKtgdD6bs6ecQv1zI3G7KwR6gjiWV7Z_Yq5aAHmmfBhQWh1mMy7AWYIFdmJ0p2oVXFJzeZQeG2828a7yQzwoaXMCB51lyOz8kCunAc88C0TWrDdYXA"}`,
+      Authorization: `Bearer ${"eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjphVXJUQUUrdnZWVTl4K0VMWFNGWEcrNk5WS1FlbEdtSjlWMkQxcWlCZ3VnIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjg0NTY4OTQ1Ljc2NDAzMywiaWF0IjoxNjg0NDgyNTQ1Ljc2NDAzMiwianRpIjoiMzAyODI3NDgzMjM4LUNKYVhYZ0FsYkpiekJrR1lsMGdoYTItM1V1bVNtUSIsImNpZCI6IkxtS1kyQmJGSnNwaDNmZ29oZXUwTXciLCJsaWQiOiJ0Ml8zdjQ3bnhpZSIsImFpZCI6InQyXzN2NDdueGllIiwibGNhIjoxNTU5Mjc3MDQyMTE3LCJzY3AiOiJlSnlLVnRKU2lnVUVBQURfX3dOekFTYyIsImZsbyI6OX0.mhCVuz_k56qUlB5iaXVTEMy76ba6jwxlnnOaJVwVfdvd_cI8Cd7UbK_LdksPhUBlWswJV-rgowPHTLvATAnCXerhHyX-oFW8wNwrjVVvKuhMTwjFCJpLv3rB40gz7oBfqgqiShmwmyf54koET8GzY7aqZeb6fIXFjPmjXrVZl1iG3iXFjNtyz7jG0dbjlyflfQzs7dR2QfIuywmx0LahZyEkXwIoZd9NnFSVbVzfxwEh2LtKp1nN4PNq0QlukcM7AbQeCQEVQQU7svcUvj_VzNp9_FUWGo-p-b3NDT36Pfj4FMM_jIdocXdEZ_Xq1VFp43kqWYKVy95AHX-cttRwOQ"}`,
     },
   });
 
@@ -28,20 +35,22 @@ const MySubRedditList = () => {
   }, []);
 
   return (
-    <Drawer.Section title="My SubReddits">
-      {subrUser &&
-        subrUser.map((subreddit, index) => (
-          <Drawer.Item
-            key={index}
-            label={subreddit.data?.title}
-            onPress={() =>
-              navigation.navigate("Postlist", {
-                subreddit: subreddit.data?.display_name,
-              })
-            }
-          />
-        ))}
-    </Drawer.Section>
+    <ScrollView>
+      <Drawer.Section title="My SubReddits">
+        {subrUser &&
+          subrUser.map((subreddit, index) => (
+            <Drawer.Item
+              key={index}
+              label={subreddit.data?.title}
+              onPress={() =>
+                navigation.navigate("Postlist", {
+                  subreddit: subreddit.data?.display_name,
+                })
+              }
+            />
+          ))}
+      </Drawer.Section>
+    </ScrollView>
   );
 };
 
