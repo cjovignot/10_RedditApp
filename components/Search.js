@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text, KeyboardAvoidingView } from "react-native";
 import { Searchbar } from "react-native-paper";
 import axios from "axios";
 
@@ -37,31 +37,36 @@ const SearchComponent = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Searchbar
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
         style={styles.search}
+        inputStyle={styles.input}
       />
-      <View>
+      <View style={{position: 'absolute', marginTop: 50}}>
         {redditNames.map((item, index) => (
           <TouchableOpacity key={index} onPress={() => handlePress(item)}>
             <Text style={styles.item}>{item}</Text>
           </TouchableOpacity>
         ))}
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   search: {
-    // flex: 1,
-    width: 270,
-    height: 40,
     borderRadius: 8,
-    // backgroundColor: "grey",
+    width: 200,
+    marginTop: 6,
+    height: 40,
+    // marginBottom: 5,
+  },
+  input: {
+    fontSize: 16,
+    marginTop: -7,
   },
   item: {
     padding: 8,

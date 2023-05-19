@@ -53,7 +53,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home" useLegacyImplementation={true}>
+      <Drawer.Navigator initialRouteName="Home" useLegacyImplementation={true} >
         {/* Pass the separate component to Drawer.Screen */}
         <Drawer.Screen
           name="Ditters"
@@ -61,7 +61,7 @@ export default function App() {
           options={({ navigation }) => ({
             headerRight: () => (
               <View style={{ flexDirection: "row" }}>
-                <SearchBar navigation={navigation}/>
+                <SearchBar navigation={navigation} />
                 <IconButton
                   icon="account-circle"
                   size={28}
