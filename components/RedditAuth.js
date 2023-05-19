@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button } from "react-native";
 import { Buffer } from "buffer";
 import Toast from "react-native-root-toast";
-import {REDIRECT_URI, REDDIT_CLIENT_ID, REDDIT_SECRET_KEY} from '@env';
+import {REDIRECT_URI, REDDIT_CLIENT_ID, REDDIT_SECRET_KEY} from "@env";
 
 WebBrowser.maybeCompleteAuthSession();
 
