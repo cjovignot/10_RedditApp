@@ -17,6 +17,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "axios": "^1.4.0",
     "buffer": "^6.0.3",
+    "dot-env": "^0.0.1",
     "expo": "~48.0.15",
     "expo-auth-session": "^4.0.3",
     "expo-av": "~13.2.1",
@@ -37,7 +38,8 @@
     "unescape": "^1.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "react-native-dotenv": "^3.4.8"
   },
   "private": true
 }

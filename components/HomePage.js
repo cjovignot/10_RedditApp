@@ -3,6 +3,7 @@ import { View, Text, Image, FlatList, StyleSheet } from "react-native";
 import Card from "./Card";
 import Filters from "./Filters";
 import axios from "axios";
+import {REDIRECT_URI, REDDIT_CLIENT_ID, REDDIT_SECRET_KEY} from '@env';
 
 function HomePage() {
   const [subredditsData, setSubredditsData] = React.useState([]);
