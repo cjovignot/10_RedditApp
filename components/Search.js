@@ -59,14 +59,16 @@ const SearchComponent = ({ navigation }) => {
 const styles = StyleSheet.create({
   search: {
     borderRadius: 8,
-    width: 200,
+    width: 270,
     marginTop: 6,
     height: 40,
-    // marginBottom: 5,
+    borderWidth: 1,
+    borderColor: 'gray',
+    backgroundColor: 'white',
   },
   input: {
     fontSize: 16,
-    marginTop: -7,
+    marginTop: -8,
   },
   item: {
     padding: 8,
