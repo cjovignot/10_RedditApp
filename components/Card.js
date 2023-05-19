@@ -16,7 +16,6 @@ const MyComponent = ({ subredditsData }) => {
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
 
-  // console.log(decode(subredditsData.data.media_metadata?.p?.u))
 
   const source = {
     html: decode(subredditsData?.data?.selftext_html)
@@ -66,7 +65,7 @@ const MyComponent = ({ subredditsData }) => {
           )}
         </Card.Content>
 
-        <VoteButtons subredditsData={subredditsData}/>
+        {/* <VoteButtons subredditsData={subredditsData}/> */}
 
       </Card>
   );
