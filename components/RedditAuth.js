@@ -45,10 +45,24 @@ const discovery = {
 };
 
 export default function App({ FetchDetails, setData, data }) {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  async function checkUserToken() {
+    const token = await AsyncStorage.getItem("UserToken");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }
+
+  React.useEffect(() => {
+    checkUserToken();
+  }, []);
   async function Logout() {
     try {
       await AsyncStorage.removeItem("UserToken");
       await AsyncStorage.removeItem("UserCode");
+      setIsLoggedIn(false);
+      setData(undefined);
       console.log("JESUISLA");
       console.log("JESUISPASLA");
     } catch (error) {
@@ -92,6 +106,7 @@ export default function App({ FetchDetails, setData, data }) {
             console.log("Display Name: ", data.name);
             AsyncStorage.setItem("UserName", data.name);
             FetchDetails();
+            setIsLoggedIn(true);
             Toast.show("Welcome back, " + data.name, {
               duration: Toast.durations.LONG,
               position: Toast.positions.BOTTOM,
@@ -110,20 +125,24 @@ export default function App({ FetchDetails, setData, data }) {
 
   return (
     <>
-      <Button
-        disabled={!request}
-        title="Login"
-        onPress={() => {
-          promptAsync();
-        }}
-      />
-      <Button
-        disabled={!request}
-        title="Logout"
-        onPress={() => {
-          Logout();
-        }}
-      />
+      {!isLoggedIn && (
+        <Button
+          disabled={!request}
+          title="Login"
+          onPress={() => {
+            promptAsync();
+          }}
+        />
+      )}
+      {isLoggedIn && (
+        <Button
+          disabled={!request}
+          title="Logout"
+          onPress={() => {
+            Logout();
+          }}
+        />
+      )}
     </>
   );
 }

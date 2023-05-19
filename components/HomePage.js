@@ -26,7 +26,6 @@ function HomePage() {
   };
 
   const fetchData = (after = null) => {
-    // Fetch data based on the selected filter
     const token =TOKEN_COSME
     
     const options = {
@@ -59,11 +58,9 @@ function HomePage() {
   };
 
   useEffect(() => {
-    // Reset the existing data when the filter value changes
     setSubredditsData([]);
     setAfter(null);
 
-    // Fetch new data based on the selected filter
     fetchData();
   }, [best, hot, news]);
 
