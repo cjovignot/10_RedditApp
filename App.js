@@ -1,7 +1,13 @@
 import "react-native-gesture-handler";
 
 import * as React from "react";
-import { Button, View, ScrollView, SafeAreaView, StyleSheet } from "react-native";
+import {
+  Button,
+  View,
+  ScrollView,
+  SafeAreaView,
+  StyleSheet,
+} from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -12,12 +18,13 @@ import MySubredditList from "./components/MySubredditList";
 import PostList from "./components/Postlist";
 import HomePage from "./components/HomePage";
 import SearchBar from "./components/Search";
+import Filters from "./components/Filters";
 
 function RealDittersStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Ditters"
+        name="noDitters"
         component={HomeScreen}
         options={{ headerShown: false }}
       />
@@ -66,9 +73,9 @@ export default function App() {
 }
 
 function HomeScreen() {
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      {/* <Filters /> */}
       <HomePage />
     </SafeAreaView>
   );
