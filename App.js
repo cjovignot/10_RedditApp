@@ -16,9 +16,9 @@ import { Provider as PaperProvider, IconButton } from "react-native-paper";
 import ProfileScreen from "./components/ProfileScreen";
 import MySubredditList from "./components/MySubredditList";
 import PostList from "./components/Postlist";
+import UnitPost from "./components/UnitPost";
 import HomePage from "./components/HomePage";
 import SearchBar from "./components/Search";
-import Filters from "./components/Filters";
 
 function RealDittersStack() {
   return (
@@ -39,6 +39,11 @@ function RealDittersStack() {
         component={PostList}
         options={{ title: "My home" }}
       />
+      <Stack.Screen
+        name="PostView"
+        component={UnitPost}
+        options={{ title: "PostView" }}
+      />
     </Stack.Navigator>
   );
 }
@@ -48,14 +53,14 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home" useLegacyImplementation={true}>
+      <Drawer.Navigator initialRouteName="Home" useLegacyImplementation={true} >
         {/* Pass the separate component to Drawer.Screen */}
         <Drawer.Screen
           name="Ditters"
           component={RealDittersStack}
           options={({ navigation }) => ({
             headerRight: () => (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={{ flexDirection: "row" }}>
                 <SearchBar navigation={navigation} />
                 <IconButton
                   icon="account-circle"
@@ -66,7 +71,7 @@ export default function App() {
             ),
           })}
         />
-        <Drawer.Screen name="My Subreddits" component={MySubredditList} />
+        <Drawer.Screen name="My Subreddits" component={MySubredditList}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -75,7 +80,6 @@ export default function App() {
 function HomeScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {/* <Filters /> */}
       <HomePage />
     </SafeAreaView>
   );

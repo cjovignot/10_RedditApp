@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text, KeyboardAvoidingView } from "react-native";
 import { Searchbar } from "react-native-paper";
 import axios from "axios";
 
@@ -37,38 +37,45 @@ const SearchComponent = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Searchbar
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
         style={styles.search}
+        inputStyle={styles.input}
       />
-      <View>
+      <View style={{position: 'absolute', marginTop: 50}}>
         {redditNames.map((item, index) => (
           <TouchableOpacity key={index} onPress={() => handlePress(item)}>
             <Text style={styles.item}>{item}</Text>
           </TouchableOpacity>
         ))}
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   search: {
-    width: 200,
-    borderRadius: 0,
+    borderRadius: 8,
+    width: 270,
+    marginTop: 6,
+    height: 40,
+    borderWidth: 1,
+    borderColor: 'gray',
+    backgroundColor: 'white',
+  },
+  input: {
+    fontSize: 16,
+    marginTop: -8,
   },
   item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+    padding: 8,
+    fontSize: 15,
+    // height: 30,
     backgroundColor: "white",
   },
-  //   resultContainer: {
-  //     marginTop: 50, // adjust this as needed
-  //   },
 });
 
 export default SearchComponent;
