@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button } from "react-native";
 import { Buffer } from "buffer";
 import Toast from "react-native-root-toast";
-import {REDIRECT_URI, REDDIT_CLIENT_ID, REDDIT_SECRET_KEY} from "@env";
+import {REDDIT_CLIENT_ID, REDDIT_SECRET_KEY} from "@env";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -33,11 +33,11 @@ async function exchangeCodeForToken(code, redirectUri) {
 }
 
 const redirectUri = makeRedirectUri({
-  native: REDIRECT_URI,
+  native: 'exp://localhost:19000/--/redirect',
   proxy: "true",
 });
 
-console.log(redirectUri);
+console.log("URL POUR REDDIT CONFIG :" + redirectUri);
 
 const discovery = {
   authorizationEndpoint: "https://www.reddit.com/api/v1/authorize.compact",
