@@ -62,7 +62,6 @@ function ProfileScreen() {
             }}
           />
         )}
-        <Text>This is the profile screen</Text>
         {data && data.subreddit && (
           <>
             <Text>{data.subreddit.title}</Text>

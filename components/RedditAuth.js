@@ -36,8 +36,8 @@ const redirectUri = makeRedirectUri({
   native: 'exp://localhost:19000/--/redirect',
   proxy: "true",
 });
-
-console.log("URL POUR REDDIT CONFIG :" + redirectUri);
+console.log("IF AUTH DOESNT WORK PLEASE CHANGE YOUR API KEYS IN .ENV AND UPDATE URI IN REDDIT CONFIG");
+console.log("URL REDDIT CONFIG : " + redirectUri);
 
 const discovery = {
   authorizationEndpoint: "https://www.reddit.com/api/v1/authorize.compact",
@@ -81,7 +81,7 @@ export default function App({ FetchDetails, setData, data }) {
   const [request, response, promptAsync] = useAuthRequest(
     {
       clientId: REDDIT_CLIENT_ID,
-      scopes: ["identity"],
+          scopes: ["identity", "vote", "read", "submit", "mysubreddits", "privatemessages", "subscribe"],
       redirectUri: redirectUri,
     },
     discovery

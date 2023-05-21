@@ -3,7 +3,6 @@ import { View, Text, Image, FlatList, StyleSheet } from "react-native";
 import Card from "./Card";
 import Filters from "./Filters";
 import axios from "axios";
-import {TOKEN_COSME} from '@env';
 
 function HomePage() {
   const [subredditsData, setSubredditsData] = React.useState([]);
@@ -25,19 +24,14 @@ function HomePage() {
     setNews(value);
   };
 
-  const fetchData = (after = null) => {
-    const token =TOKEN_COSME
-    
+  const fetchData = (after = null) => {    
     const options = {
       method: "GET",
       url: best
-        ? "https://oauth.reddit.com/best"
+        ? "https://www.reddit.com/best.json"
         : hot
-        ? "https://oauth.reddit.com/hot"
-        : "https://oauth.reddit.com/new",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
+        ? "https://www.reddit.com/hot.json"
+        : "https://www.reddit.com/new.json",
     };
 
     if (after) {

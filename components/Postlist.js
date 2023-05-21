@@ -2,7 +2,7 @@ import * as React from "react";
 import { Text, View, ScrollView, StyleSheet } from "react-native";
 import { Provider as PaperProvider, IconButton } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
-import {TOKEN_COSME} from '@env';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Card from "../components/Card";
 
@@ -18,15 +18,16 @@ const Postlist = ({ route, navigation }) => {
 
   const scrollViewRef = React.useRef();
 
-  const api = axios.create({
-    baseURL: "https://oauth.reddit.com",
-    headers: {
-      Authorization: `Bearer ${TOKEN_COSME}`,
-    },
-  });
 
   const fetchData = async (afterParam = null) => {
     try {
+      const token = await AsyncStorage.getItem("UserToken");
+       const api = axios.create({
+    baseURL: "https://oauth.reddit.com",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
       setPosts([]);
       const response = afterParam
         ? await api.get(`/r/${subreddit}/hot`, {

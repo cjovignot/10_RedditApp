@@ -9,22 +9,28 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import {TOKEN_COSME} from '@env';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MySubRedditList = () => {
   const [subrUser, setSubrUser] = React.useState(null);
   const navigation = useNavigation();
+  const token = AsyncStorage.getItem("UserToken");
 
-  const api = axios.create({
-    baseURL: "https://oauth.reddit.com",
-    headers: {
-      Authorization: `Bearer ${TOKEN_COSME}`,
-    },
-  });
 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
+        const token = await AsyncStorage.getItem("UserToken");
+           if (!token) {
+          setSubrUser([]);
+          return;
+        }
+         const api = axios.create({
+            baseURL: "https://oauth.reddit.com",
+            headers: {
+            Authorization: `Bearer ${token}`,
+    },
+  });
         const response = await api.get("/subreddits/mine/subscriber");
         setSubrUser(response.data.data.children);
       } catch (error) {
@@ -33,7 +39,7 @@ const MySubRedditList = () => {
     };
 
     fetchData();
-  }, []);
+  }, [token]);
 
   return (
     <ScrollView>

@@ -49,7 +49,7 @@ const MyComponent = () => {
           }
 
           {subredditsData?.data?.is_gallery && subredditsData?.data?.is_gallery === true && (
-            <Card.Cover style={[{height: 350}, {width: 'auto'}, {marginTop: 20}]} source={{ uri: decode(subredditsData?.data?.media_metadata[Object.keys(subredditsData?.data?.media_metadata)[0]].p[3].u) }}/>
+           <Card.Cover style={[{height: 350}, {width: 'auto'}, {marginTop: 20}]} source={{ uri: decode(subredditsData?.data?.media_metadata[Object.keys(subredditsData?.data?.media_metadata)[0]]?.p[3]?.u) }}/>
           )}
 
           {subredditsData?.data?.is_video && subredditsData?.data?.is_video === true && (

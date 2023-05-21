@@ -3,14 +3,15 @@ import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Card, Text, IconButton } from "react-native-paper";
 import axios from "axios";
-import {TOKEN_COSME} from '@env';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MyComponent = ({ subredditsData }) => {
   const [upVoted, setUpVoted] = useState(false);
   const [downVoted, setDownVoted] = useState(false);
-  const token = TOKEN_COSME;
 
-  const upVote = () => {
+  const upVote = async () => {
+    const token = await AsyncStorage.getItem("UserToken");
+    console.log(token)
     const id=subredditsData.data.name
     const dir=1
 
@@ -62,8 +63,11 @@ const MyComponent = ({ subredditsData }) => {
     }
   };
 
-  const downVote = () => {
+  const downVote = async () => {
+    const token = await AsyncStorage.getItem("UserToken");
+    console.log(token)
     const id=subredditsData.data.name
+    console.log(id)
     const dir=-1
 
     const options = {
